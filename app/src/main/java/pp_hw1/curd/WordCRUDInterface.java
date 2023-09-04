@@ -4,8 +4,8 @@ import java.util.List;
 
 public interface WordCRUDInterface {
     void toAdd();
-    void update(Object object);
-    void delete(Object object);
+    void update();
+    void delete();
     void getAll();
     List<Integer> findTargetWords(String targetWord);
 

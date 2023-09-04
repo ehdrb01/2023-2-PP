@@ -25,15 +25,76 @@ public class WordCRUD implements WordCRUDInterface {
     }
 
     @Override
-    public void update(Object object) {
+    public void update() {
+        scanner.nextLine();
         System.out.print("=> 수정할 단어 검색 : ");
         String targetWord = scanner.nextLine();
+
+        List<Integer> targetList = findTargetWords(targetWord);
+        System.out.println("--------------------------------");
+        for(int i = 0; i < targetList.size(); i++) {
+            System.out.print(i + 1 + " ");
+            for(int k = 0; k < wordList.get(targetList.get(i)).getLevel(); k++) {
+                System.out.print("*");
+            }
+            System.out.print("            ");
+            System.out.print(wordList.get(targetList.get(i)).getWord() + "     ");
+            System.out.println(wordList.get(targetList.get(i)).getMeaning());
+        }
+        System.out.println("--------------------------------\n");
+        System.out.print("=> 수정할 번호 선택 : ");
+        int updateNumber = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.print("=> 뜻 입력 : ");
+        String updateMeaning = scanner.nextLine();
+
+        wordList.get(targetList.get(updateNumber - 1)).setMeaning(updateMeaning);
+        System.out.println("단어가 수정되었습니다.");
+
     }
 
     @Override
-    public void delete(Object object) {
+    public void delete() {
+        scanner.nextLine();
         System.out.print("=> 삭제할 단어 검색 : ");
         String targetWord = scanner.nextLine();
+
+        List<Integer> targetList = findTargetWords(targetWord);
+        System.out.println("--------------------------------");
+        for(int i = 0; i < targetList.size(); i++) {
+            System.out.print(i + 1 + " ");
+            for(int k = 0; k < wordList.get(targetList.get(i)).getLevel(); k++) {
+                System.out.print("*");
+            }
+            System.out.print("            ");
+            System.out.print(wordList.get(targetList.get(i)).getWord() + "     ");
+            System.out.println(wordList.get(targetList.get(i)).getMeaning());
+        }
+        System.out.println("--------------------------------\n");
+        System.out.print("=> 삭제할 번호 선택 : ");
+        int deleteNumber = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.print("=> 정말로 삭제하실래요?(Y/n) : ");
+        String isDeleted = scanner.nextLine();
+
+        while(true) {
+            if(isDeleted.equals("Y")) {
+                wordList.remove(targetList.get(deleteNumber - 1));
+                System.out.println("단어가 삭제되었습니다.");
+                break;
+            } else if(isDeleted.equals("n")) {
+                System.out.println("단어가 삭제되지 않았습니다.");
+                break;
+            } else {
+                System.out.println("다시 입력해주세요.");
+                System.out.print("=> 정말로 삭제하실래요?(Y/n) : ");
+                isDeleted = scanner.nextLine();
+            }
+        }
+
+
     }
 
     @Override
@@ -53,9 +114,14 @@ public class WordCRUD implements WordCRUDInterface {
 
     @Override
     public List<Integer> findTargetWords(String targetWord) {
+        List<Integer> targetList = new ArrayList<>();
 
-
-        return null;
+        for(int i = 0; i < wordList.size(); i++) {
+            if(wordList.get(i).getWord().contains(targetWord)) {
+                targetList.add(i);
+            }
+        }
+        return targetList;
     }
 
     public int selectMenu() {
