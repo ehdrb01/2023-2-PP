@@ -1,10 +1,13 @@
 package pp_hw1.curd;
 
+import java.util.List;
+
 public interface WordCRUDInterface {
-    Object toAdd();
-    int update(Object object);
-    int delete(Object object);
-    void selectOne(int id);
+    void toAdd();
+    void update(Object object);
+    void delete(Object object);
+    void getAll();
+    List<Integer> findTargetWords(String targetWord);
 
 
 }
