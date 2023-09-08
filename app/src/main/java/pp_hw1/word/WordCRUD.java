@@ -124,6 +124,50 @@ public class WordCRUD implements WordCRUDInterface {
         return targetList;
     }
 
+    @Override
+    public int findWord() {
+        scanner.nextLine();
+        System.out.print("=> 찾고 싶은 단어는? : ");
+        String keyword = scanner.nextLine();
+
+        System.out.println("--------------------------------");
+        for(int i = 0; i < wordList.size(); i++) {
+            if(wordList.get(i).getWord().contains(keyword)) {
+                System.out.print(i + 1 + " ");
+                for(int k = 0; k < wordList.get(i).getLevel(); k++) {
+                    System.out.print("*");
+                }
+                System.out.print("            ");
+                System.out.print(wordList.get(i).getWord() + "     ");
+                System.out.println(wordList.get(i).getMeaning());
+            }
+        }
+        System.out.println("--------------------------------\n");
+
+
+        return 0;
+    }
+
+    @Override
+    public void findByLevel() {
+        System.out.println("=> 찾고 싶은 단계는?(1,2,3) : ");
+        int selectLevel = scanner.nextInt();
+
+        System.out.println("--------------------------------");
+        for(int i = 0; i < wordList.size(); i++) {
+            if(wordList.get(i).getLevel() == selectLevel) {
+                System.out.print(i + 1 + " ");
+                for(int k = 0; k < wordList.get(i).getLevel(); k++) {
+                    System.out.print("*");
+                }
+                System.out.print("            ");
+                System.out.print(wordList.get(i).getWord() + "     ");
+                System.out.println(wordList.get(i).getMeaning());
+            }
+        }
+        System.out.println("--------------------------------\n");
+    }
+
     public int selectMenu() {
         System.out.println("********************");
         System.out.println("1. 모든 단어 보기");

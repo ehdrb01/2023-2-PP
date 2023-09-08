@@ -23,9 +23,9 @@ public class WordMaster {
             if(menu == 1) { // 모든 단어보기
                 wordCRUD.getAll();
             } else if(menu == 2) { // 수준별 단어보기
-
+                wordCRUD.findByLevel();
             } else if(menu == 3) { // 단어 검색
-
+                wordCRUD.findWord();
             } else if(menu == 4){ // 단어 추가
                 wordCRUD.toAdd();
                 System.out.println("새 단어가 단어장에 추가되었습니다 !!!");

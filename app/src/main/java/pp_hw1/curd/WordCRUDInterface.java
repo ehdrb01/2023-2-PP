@@ -8,6 +8,9 @@ public interface WordCRUDInterface {
     void delete();
     void getAll();
     List<Integer> findTargetWords(String targetWord);
+    int findWord();
+    void findByLevel();
+
 
 
 }
