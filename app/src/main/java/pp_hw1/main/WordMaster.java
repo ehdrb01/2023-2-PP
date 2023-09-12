@@ -16,6 +16,7 @@ public class WordMaster {
     }
 
     public void run(String[] args) {
+
         System.out.println("*** 영단어 마스터 ***\n");
         while(true) {
             int menu = wordCRUD.selectMenu();
@@ -34,7 +35,7 @@ public class WordMaster {
             } else if(menu == 6) { // 단어 삭제
                 wordCRUD.delete();
             } else if(menu == 7) { // 파일 저장
-
+                wordCRUD.saveToFile();
             } else {
                 break;
             }

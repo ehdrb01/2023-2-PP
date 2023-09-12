@@ -10,7 +10,7 @@ public interface WordCRUDInterface {
     List<Integer> findTargetWords(String targetWord);
     int findWord();
     void findByLevel();
-
+    void saveToFile();
 
 
 }

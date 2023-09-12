@@ -22,6 +22,7 @@ dependencies {
 
     // This dependency is used by the application.
     implementation 'com.google.guava:guava:31.1-jre'
+
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
@@ -33,10 +34,16 @@ java {
 
 application {
     // Define the main class for the application.
-    mainClass = 'pp_hw1.App'
+    mainClass = 'pp_hw1.main.WordMaster'
 }
 
 tasks.named('test') {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
+}
+
+tasks.register("prepareKotlinBuildScriptModel"){}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '8.1'
 }

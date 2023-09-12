@@ -2,6 +2,10 @@ package pp_hw1.word;
 
 import pp_hw1.curd.WordCRUDInterface;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -166,6 +170,34 @@ public class WordCRUD implements WordCRUDInterface {
             }
         }
         System.out.println("--------------------------------\n");
+    }
+
+    @Override
+    public void saveToFile() { // /app/src/main/resources
+        File file = new File("wordMaster.txt");
+        try {
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file, true));
+
+            bufferedWriter.write("--------------------------------\n");
+            for(int i = 0; i < wordList.size(); i++) {
+                String temp = "";
+
+                temp += i + 1 + " ";
+                for(int k = 0; k < wordList.get(i).getLevel(); k++) {
+                    temp += "*";
+                }
+                temp += "            ";
+                temp += wordList.get(i).getWord() + "     ";
+                temp += wordList.get(i).getMeaning();
+
+                bufferedWriter.write(temp);
+                bufferedWriter.write("\n");
+            }
+            bufferedWriter.flush();
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public int selectMenu() {
