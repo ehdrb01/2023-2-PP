@@ -16,6 +16,7 @@ public class WordMaster {
     }
 
     public void run(String[] args) {
+        wordCRUD.getFileData();
 
         System.out.println("*** 영단어 마스터 ***\n");
         while(true) {

@@ -2,10 +2,7 @@ package pp_hw1.word;
 
 import pp_hw1.curd.WordCRUDInterface;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -85,7 +82,8 @@ public class WordCRUD implements WordCRUDInterface {
 
         while(true) {
             if(isDeleted.equals("Y")) {
-                wordList.remove(targetList.get(deleteNumber - 1));
+                Word deleteWord = wordList.get(targetList.get(deleteNumber-1));
+                wordList.remove(deleteWord);
                 System.out.println("단어가 삭제되었습니다.");
                 break;
             } else if(isDeleted.equals("n")) {
@@ -174,9 +172,10 @@ public class WordCRUD implements WordCRUDInterface {
 
     @Override
     public void saveToFile() { // /app/src/main/resources
-        File file = new File("wordMaster.txt");
+        File file = new File("../../../resources/wordMaster.txt");
+
         try {
-            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file, true));
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file, false));
 
             bufferedWriter.write("--------------------------------\n");
             for(int i = 0; i < wordList.size(); i++) {
@@ -214,6 +213,34 @@ public class WordCRUD implements WordCRUDInterface {
         System.out.print("=> 원하는 메뉴는? ");
 
         return scanner.nextInt();
+    }
+
+    public void getFileData() {
+        try {
+            File file = new File("../../../resources/wordMaster.txt");
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+
+            bufferedReader.readLine();
+
+            String temp;
+
+            while ((temp = bufferedReader.readLine()) != null) {
+                String[] text = temp.split("\\s+");
+
+                if(text[1].equals("*")) {
+                    Word word = new Word(text[2], 1, text[3]);
+                    wordList.add(word);
+                } else if(text[1].equals("**")) {
+                    Word word = new Word(text[2], 2, text[3]);
+                    wordList.add(word);
+                } else {
+                    Word word = new Word(text[2], 3, text[3]);
+                    wordList.add(word);
+                }
+            }
+        } catch (Exception e) {
+
+        }
     }
 
     public Scanner getScanner() {
